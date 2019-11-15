@@ -1,0 +1,43 @@
+
+<div *ngIf = "resultClicked == false">
+<p>favorite-editor works!</p>
+<div>
+
+        <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">City</th>
+                    <th scope="col">State</th>
+                    <th scope="col">Favorite</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor = " let y of favitems">
+                        <td><a href="#" (click)="goBackResults(y.city, y.state, y.img)">{{ y.city }}</a></td>    
+                        <td>{{ y.state }}</td>
+                        <td>{{ y.img }}</td>
+                        
+                  </tr>
+                  
+                </tbody>
+              </table>
+<!--
+    <table>
+        <tr>
+            <td>CIty</td>
+            <td>State</td>
+            <td>CIty</td>
+        </tr>
+        <tr>
+           <td  *ngFor="let x of pointer | keyvalue">{{x.value}}</td>
+           
+        </tr>
+    </table>
+
+</div>-->
+
+</div></div>
+
+<app-result-tab *ngIf="weatherJ" [dataJ] = "weatherJ" [linkJ] = "newdataseal" [sealstate] = "sealstate" [twittercity]="twittercity" [resultClicked]="resultClicked" [linkJ]="sealsrc"></app-result-tab>

@@ -1,0 +1,219 @@
+<style>
+  .tableSeal td{
+  border: 0px; 
+  background-color: #63b4cf; 
+  padding-left: 1%; 
+  max-height: 30%; 
+  max-width: 30%;
+  text-align: center;
+}
+.nav-center {  
+  text-align: center;
+  
+}
+
+.blank_row{
+  height: 10px;
+}
+
+</style>
+
+
+
+<div *ngIf="resultClicked == true" class=" container"  style="margin :7% auto; width: 65%;">
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" (click)="returnImgSrc()">Current</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" (click)="displayTempChart()">Hourly</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false" (click)="displayWeeklyChart()">Weekly</a>
+        </li>
+        
+        <li class="nav-item">
+                 <div>
+                <button type="submit"  class="btn btn-default" style="color: black; font-size: medium;  max-height: 20%; max-width: 5%; float: right; padding: 0; margin-left: 2px;" (click) = "favorites()"><img id="favButton" src="http://vaish.freevar.com/white.png" style="float: left; max-height: 100%; max-width: 100%; float: right;" ></button>
+        
+               <button type="submit" class="btn btn-default" style="color: black; font-size: medium;  max-height: 20%; max-width:5%;  float: right; padding: 0; margin-right: 2px;" (click) = "twitter_api()"><img src="http://vaish.freevar.com/Twitter.png" style="float: left; max-height: 100%; max-width: 100%; float: right; " ></button>
+              </div>
+              </li>
+  
+            
+      </ul>
+      
+      
+      <div class="tab-content" id="myTabContent" style="margin-top:5%;">
+        <!--Tab Number 1-->
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" style="width:100%;">
+          <div class="card" style=" background-color: #63b4cf; border: 1px solid black; max-width: 50%; margin: auto;">
+                <div class="card-body">
+                    <table style="border: 0px; background-color: #63b4cf; padding: 2%; text-align: left; ">
+                        <tr>
+                          <td><div class="card-title" style="font-size: 1.5vw;">{{ twittercity }}</div></td>
+                          <td rowspan="4"><img id="sealimg" src="{{ linkJ }}" style="max-height: 90%; max-width: 90%; float: right;"></td>
+                        </tr>
+    
+                      <tr><td><div style="font-size: 1.5vw;" class="card-subtitle mb-2 text-muted" >{{ dataJ.timezone }}</div></td></tr>
+                      
+    
+                      <tr><td style="font-size: 1.5vw;"> {{ dataJ.currently.temperature }}<img src="https://cdn3.iconfinder.com/data/icons/virtual-notebook/16/button_shape_oval-512.png"  style="max-height: 3%; max-width: 3%; vertical-align: super;">F</td>
+                        
+    
+                      </tr>
+                      <tr class="blank_row">
+                          <td colspan="2"></td>
+                      </tr>
+                      <tr style="font-size: 1.5vw;"><td>{{ dataJ.currently.summary }}</td></tr>
+                      
+                      
+                        
+                      </table><br>
+
+
+
+
+                  <table class="tableSeal" style="border: 0px; background-color: #63b4cf; padding: 10%;">
+                      
+                      <tr>
+
+                          <td><img src="https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-16-512.png"  data-toggle="tooltip" data-placement="top" title="Humidity" style="max-height: 30%; max-width: 30%;" >
+                            </td>
+
+                          <td><img src="https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-25-512.png"  data-toggle="tooltip" data-placement="top" title="Pressure"style="max-height: 30%; max-width: 30%;" >
+                              </td>
+
+                          <td><img src="https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-27-512.png"  data-toggle="tooltip" data-placement="top" title="WindSpeed" style="max-height: 30%; max-width: 30%;" >
+                                </td>
+
+                          <td><img src="https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-30-512.png"  data-toggle="tooltip" data-placement="top" title="Visibility" style="max-height: 30%; max-width: 30%;" >
+                                  </td>
+
+                          <td><img src="https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-28-512.png"  data-toggle="tooltip" data-placement="top" title="cloudCover" style="max-height: 30%; max-width: 30%;" >
+                                    </td>
+
+                          <td><img src="https://cdn2.iconfinder.com/data/icons/weather-74/24/weather-24-512.png"  data-toggle="tooltip" data-placement="top" title="Ozone" style="max-height: 30%; max-width: 30%;" >
+                                      </td>
+
+
+
+                            </tr>
+                        
+                      <tr style="font-size: 0.8vw;">
+                        <td>{{ dataJ.currently.humidity }}</td>
+                        <td>{{ dataJ.currently.pressure }}</td>
+                        <td>{{ dataJ.currently.windSpeed }}</td>
+                        <td>{{ dataJ.currently.visibility }}</td>
+                        <td>{{ dataJ.currently.cloudCover }}</td>
+                        <td>{{ dataJ.currently.ozone }}</td>
+
+                      </tr>
+                            </table>
+
+                  </div>  
+                </div>
+
+
+
+        </div>
+
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <select (change)="displayTempChart($event.target.value)">
+            <option>Temperature </option>
+            <option>Pressure</option>
+            <option>Humidity</option>
+            <option>Ozone</option>
+            <option>Visibility</option>
+            <option>Wind Speed</option>
+
+          </select>
+          <div style="display: block" > 
+            <canvas baseChart
+                    [datasets]="Data"
+                    [options]="Options"
+                    [labels]="Label"
+                    [legend]="Legend"
+                    [colors]="Color"
+                    [chartType]="Type" *ngIf="Data" >
+            </canvas>
+           
+          </div>
+        </div>
+  
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+
+
+        <div>
+        <h2> Weekly Weather </h2>
+        <div style="display: block" > 
+         <canvas baseChart
+                 [datasets]="ChartData"
+                 [options]="ChartOptions"
+                 [labels]="ChartLabels"
+                 [legend]="ChartLegend"
+                 [colors]="ChartColors"
+                 [chartType]="ChartType" 
+                 (chartClick)="click_chart_bar($event)"
+                 *ngIf="ChartData" id="canvasChart" data-toggle="modal" data-target="#myModal" >
+          </canvas>
+         </div>
+        </div>
+
+
+
+
+  </div>
+
+
+ </div>
+<div class="modal fade" id="myModal" role="dialog" *ngIf= "modal_data">
+    <div class="modal-dialog">
+    
+      
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          
+          <table>
+              <tr>
+                <td>{{ twittercity }}</td>
+                <td rowspan="3" style="float: right;"></td>
+              </tr>
+              <tr>
+                <td>{{modal_data.currently.temperature}}</td>
+              </tr>
+              <tr>
+                <td>{{modal_data.currently.summary}}</td>
+              </tr>
+            </table>
+            <hr />
+            <table style="text-align: right;">
+              <tr><td>Precipitation: </td></tr>
+            </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+     </div>
+ </div>
+
+</div>
+ 
+
+
+     
+
+
+     <!--<div>SAY = {{ dataJ | json }}</div>-->
+    <!-- <div>SAY = {{ data | json }}</div>-->
+
+   
+  
+    
