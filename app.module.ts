@@ -10,7 +10,7 @@ import { BasicFormComponent } from './basic-form/basic-form.component';
 import { ResultTabComponent } from './result-tab/result-tab.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import {MatFormFieldModule} from '@angular/material/form-field';
+
 import { MatAutocompleteModule, MatInputModule } from '@angular/material';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
@@ -19,6 +19,8 @@ import { FavoriteEditorComponent } from './favorite-editor/favorite-editor.compo
 
 
 import { StorageServiceModule} from 'angular-webstorage-service';
+
+
 
 	
 
@@ -37,7 +39,7 @@ import { StorageServiceModule} from 'angular-webstorage-service';
     HttpClientModule,
     NoopAnimationsModule,
     MatAutocompleteModule,
-    MatFormFieldModule,
+    
     MatInputModule,
     ChartsModule,
     StorageServiceModule

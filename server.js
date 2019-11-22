@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const request = require('request');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000 || 3389;
 
 const app = express();
 
@@ -157,11 +157,12 @@ app.get('/displaymodal',function(req,res) {
     
 
     const darkskyCall2 = 'https://api.darksky.net/forecast/fc31c19ef8e101c09bc1bf4e9d9218fc/'+ latitude +','+ longitude;
+    console.log(darkskyCall2);
 
           request(darkskyCall2, (error2, response2, body2)=> {
             if (!error2 && response2.statusCode === 200) {
               const darkskyCall2response = JSON.parse(body2)
-              //console.log("Got a response From Dark SKy: ", darkskyCall1response)
+              //console.log("Got a response From Dark SKy for FAV: ", darkskyCall1response)
               res.json(darkskyCall2response);
               
             }
@@ -171,3 +172,33 @@ app.get('/displaymodal',function(req,res) {
         })
 
 });
+
+
+
+
+
+app.get('/autoComplete', async (req, res)  => {
+  term = req.query.term;
+  
+  
+
+  const darkskyCall2 = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input='+term+'&types=(cities)&language=en&key=AIzaSyBB2z_IP6C-hc_KtWbXueYQ94eXAOVY4W4';
+  console.log(darkskyCall2);
+
+        request(darkskyCall2, (error2, response2, body2)=> {
+          if (!error2 && response2.statusCode === 200) {
+            const darkskyCall2response = JSON.parse(body2)
+            console.log(darkskyCall2response)
+            res.json(darkskyCall2response);
+            
+          }
+          else {
+              console.log("Got an error: ", error2, ", status code: ", response2.statusCode)
+          }
+      })
+
+});
+
+
+
+

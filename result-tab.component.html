@@ -16,28 +16,87 @@
   height: 10px;
 }
 
+.clink{
+  color: black;
+}
+
+.tabwidth{
+      width: 75%;
+    }
+
+    #sealimg{
+
+      max-height: 40%; 
+      max-width: 40%;
+
+    }
+.cardwidth{
+  width: 60%;
+  margin: auto;
+}
+
+.font2{
+  font-size: 0.9vw;
+}
+
+.font1{
+  font-size: 1.5vw;
+}
+
+    @media only screen and (max-width: 600px) {
+      .tabwidth {
+        width: 98%;
+        margin: auto;
+  }
+
+  .cardwidth{
+  width: 100%;
+  margin: auto;
+}
+
+  #sealimg{
+
+max-height: 60px; 
+max-width: 60px;
+
+}
+
+.font2{
+  font-size: 10px;
+}
+
+.font1{
+  font-size: 20px;
+}
+    }
+
+
+
 </style>
 
 
 
-<div *ngIf="resultClicked == true" class=" container"  style="margin :7% auto; width: 65%;">
+<div id="resultTab" *ngIf="resultClicked == true || favClicked == true" class="container tabwidth"  style="margin :4% auto;">
 <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" (click)="returnImgSrc()">Current</a>
+          <a class="nav-link active clink" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true" (click)="returnImgSrc()" >Current</a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link clink" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" (click)="displayTempChart('Temperature')">Hourly</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false" (click)="displayTempChart()">Hourly</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false" (click)="displayWeeklyChart()">Weekly</a>
+          <a class="nav-link clink" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false" (click)="displayWeeklyChart()">Weekly</a>
         </li>
         
-        <li class="nav-item">
-                 <div>
-                <button type="submit"  class="btn btn-default" style="color: black; font-size: medium;  max-height: 20%; max-width: 5%; float: right; padding: 0; margin-left: 2px;" (click) = "favorites()"><img id="favButton" src="http://vaish.freevar.com/white.png" style="float: left; max-height: 100%; max-width: 100%; float: right;" ></button>
+        <li class="nav-item ml-auto" >
+                 
+
+                    <a (click) = "twitter_api()"><img src="http://vaish.freevar.com/Twitter.png" style=" max-height:40px; max-width: 35px;" ></a>
+               <a (click) = "favorites();"> <img id="favButton" src="{{favimgsrc}}" style=" max-height: 100%; max-width: 100%;" >
+               </a>
         
-               <button type="submit" class="btn btn-default" style="color: black; font-size: medium;  max-height: 20%; max-width:5%;  float: right; padding: 0; margin-right: 2px;" (click) = "twitter_api()"><img src="http://vaish.freevar.com/Twitter.png" style="float: left; max-height: 100%; max-width: 100%; float: right; " ></button>
-              </div>
+               
+              
               </li>
   
             
@@ -47,25 +106,31 @@
       <div class="tab-content" id="myTabContent" style="margin-top:5%;">
         <!--Tab Number 1-->
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" style="width:100%;">
-          <div class="card" style=" background-color: #63b4cf; border: 1px solid black; max-width: 50%; margin: auto;">
+          <div class="card cardwidth" style=" background-color: #63b4cf; border: 1px solid black; margin: auto;">
                 <div class="card-body">
                     <table style="border: 0px; background-color: #63b4cf; padding: 2%; text-align: left; ">
                         <tr>
-                          <td><div class="card-title" style="font-size: 1.5vw;">{{ twittercity }}</div></td>
-                          <td rowspan="4"><img id="sealimg" src="{{ linkJ }}" style="max-height: 90%; max-width: 90%; float: right;"></td>
+                          <td class="font1"><div class="card-title">{{ twittercity }}</div></td>
+                          
                         </tr>
     
-                      <tr><td><div style="font-size: 1.5vw;" class="card-subtitle mb-2 text-muted" >{{ dataJ.timezone }}</div></td></tr>
+                      <tr>
+                        <td class="font1"><div style="color: #263f40;" >{{ dataJ.timezone }}</div></td>
+                        <td rowspan="3"><img id="sealimg" src="{{ linkJ }}" style="float: right;"></td></tr>
+                      
+                      
+                     
+                      
                       
     
-                      <tr><td style="font-size: 1.5vw;"> {{ dataJ.currently.temperature }}<img src="https://cdn3.iconfinder.com/data/icons/virtual-notebook/16/button_shape_oval-512.png"  style="max-height: 3%; max-width: 3%; vertical-align: super;">F</td>
+                      <tr><td  class="font1"> {{ card_temp }}<img src="https://cdn3.iconfinder.com/data/icons/virtual-notebook/16/button_shape_oval-512.png"  style="max-height: 3%; max-width: 3%; vertical-align: text-top;">F</td>
                         
     
                       </tr>
-                      <tr class="blank_row">
+                      <!--<tr class="blank_row">
                           <td colspan="2"></td>
-                      </tr>
-                      <tr style="font-size: 1.5vw;"><td>{{ dataJ.currently.summary }}</td></tr>
+                      </tr>-->
+                      <tr class="font2"><td>{{ dataJ.currently.summary }}</td></tr>
                       
                       
                         
@@ -100,7 +165,7 @@
 
                             </tr>
                         
-                      <tr style="font-size: 0.8vw;">
+                      <tr class="font2">
                         <td>{{ dataJ.currently.humidity }}</td>
                         <td>{{ dataJ.currently.pressure }}</td>
                         <td>{{ dataJ.currently.windSpeed }}</td>
@@ -119,7 +184,8 @@
         </div>
 
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-          <select (change)="displayTempChart($event.target.value)">
+          
+          <select (change)="displayTempChart($event.target.value)" >
             <option>Temperature </option>
             <option>Pressure</option>
             <option>Humidity</option>
@@ -128,6 +194,7 @@
             <option>Wind Speed</option>
 
           </select>
+        
           <div style="display: block" > 
             <canvas baseChart
                     [datasets]="Data"
@@ -173,32 +240,53 @@
     
       
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" style="background-color: #63b4cf ; padding: auto 5% auto 5%;">
+            <h4 class="modal-title">{{modal_header_date}}</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="background-color: #87cefa ; padding: auto 20% auto 20%;">
           
           <table>
               <tr>
-                <td>{{ twittercity }}</td>
-                <td rowspan="3" style="float: right;"></td>
+                <td  colspan="7" class="font1" >{{ twittercity }}</td>
+                
+              </tr>
+              <tr >
+                <td colspan="7" class="font1">{{modal_temp}}<img src="https://cdn3.iconfinder.com/data/icons/virtual-notebook/16/button_shape_oval-512.png"  style="max-height: 7%; max-width: 7%; vertical-align: text-top;">F</td>
+                
+                <td colspan="4" style="text-align: right;"><img id="Modalicon" src =""  style="max-height: 30%; max-width: 30%; align-content: center;"></td>
+                <!--<td rowspan="3" style="float: right;"></td>-->
+                
               </tr>
               <tr>
-                <td>{{modal_data.currently.temperature}}</td>
-              </tr>
-              <tr>
-                <td>{{modal_data.currently.summary}}</td>
+                <td colspan="7" class="font2">{{modal_data.currently.summary}}</td>
+                
               </tr>
             </table>
             <hr />
-            <table style="text-align: right;">
-              <tr><td>Precipitation: </td></tr>
+            <table style="text-align: right; float: right;">
+              <tr class="font2"  ><td  style="float: left;">Precipitation : </td>
+              <td  style="float: left; ">{{modal_data.currently.precipIntensity.toFixed(2)}}</td></tr>
+              <tr class="font2" >
+                  <td  style="float: left;;">Chance of Rain : </td>
+                  <td  style="float: left;"> {{modal_data.currently.precipProbability*100}} % </td>
+              </tr>
+              <tr class="font2" >
+                  <td  style="float: left;">Wind Speed : </td>
+                  <td  style="float: left;"> {{modal_data.currently.windSpeed.toFixed(2)}} mph</td>
+              </tr>
+              <tr class="font2" >
+                  <td  style="float: left;">Humidity : </td>
+                  <td style="float: left;"> {{modal_data.currently.humidity*100}} % </td>
+              </tr>
+              <tr class="font2" >
+                  <td  style="float: left;">Visibility : </td>
+                  <td style="float: left;"> {{modal_data.currently.visibility}} miles</td>
+              </tr>
             </table>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+       
       </div>
       
      </div>
@@ -206,7 +294,6 @@
 
 </div>
  
-
 
      
 
